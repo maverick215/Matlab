@@ -1,0 +1,108 @@
+% This portion of the code reads in a 2-D array of Strings and Numbers and
+% plots a 2-D graph - DID NOT WORK FOR 3_D PLOT. The code below this one
+% works
+% neworder = {
+%     'N2'            'Val1'  [0.1700]
+%     'N2'            'Val2'  [0.1700]
+%     'N2'            'Val3'  [0.1800]
+%     'CSS'           'Val1'  [0.4500]
+%     'CSS'           'Val2'  [0.4500]
+%     'CSS'           'Val3'  [0.4500]
+%     'CO2'           'Val1'  [0.5100]
+%     'CO2'           'Val2'  [0.6300]
+%     'CO2'           'Val3'  [0.6300]
+%     }
+% bar3(neworder)
+%set(gca,'XtickL',neworder(:,1))
+% 
+% figure1 = figure;
+% 
+% axes1 = axes('Parent',figure1,'XTickLabel',neworder(:,1));
+% box(axes1,'on');
+% hold(axes1,'all');
+% 
+% % Create plot
+% plot3(cell2mat(neworder(:,:,3)));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % This portion of the code plots MSE for different signal types with
+% % samples reduced differently
+% 
+% signalData = ['ART'; 'CVP'; 'PAP'; 'ECG']
+% signal = cellstr(signalData)
+% rednCateg = ['Halved'; '1/3rd '; '1/4th '; '1/5th ']
+% redn = cellstr(rednCateg)
+% mse = [0.095	0.2145	0.206	0.0117; 0.2321	0.3257	0.3116	0.0202; 0.3679	0.4197	0.4483	0.0311; 0.4985	0.6764	0.6198	0.0563]
+% figure;
+% bar3(mse);
+% 
+% % Add title and axis labels
+% title('Parameter Values with sample cuts');
+% xlabel('signal');
+% ylabel('reduction');
+% zlabel('MSE');
+% 
+% % Change the x and y axis tick labels
+% set(gca, 'XTickLabel', signal);
+% set(gca, 'YTickLabel', redn);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % This portion of the code plots MSE for different NumInt techniques for
+% % the ECG Lead II signal
+% signalData = ['nearest'; 'spline '; 'pchip  '; 'v5cubic'; 'linear ']
+% technique = cellstr(signalData)
+% rednCateg = ['Halved'; '1/3rd '; '1/4th '; '1/5th ']
+% redn = cellstr(rednCateg)
+% mse = [0.0424	0.0127	0.0108	0.0104  0.0117;  0.0471	0.0166	0.0166	0.0164 0.0202; 0.0691	0.0233	0.0232	0.0229   0.0311;  0.0913	0.0345	0.0384	0.0424  0.0563]
+% figure;
+% bar3(mse);
+% 
+% % Add title and axis labels
+% title('MSE in prediction of parameter values after sample cut variations from various rebuilding techniques');
+% xlabel('technique');
+% ylabel('reduction');
+% zlabel('MSE');
+% 
+% % Change the x and y axis tick labels
+% set(gca, 'XTickLabel', technique);
+% set(gca, 'YTickLabel', redn);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This portion of the code plots Maximum % error for different signal types with
+% samples reduced differently
+% 
+% signalData = ['ART'; 'CVP'; 'PAP'; 'ECG']
+% signal = cellstr(signalData)
+% rednCateg = ['Halved'; '1/3rd '; '1/4th '; '1/5th ']
+% redn = cellstr(rednCateg)
+% maxerr = [0.722	1.7223	0.8349	3.7726; 0.85	3.1681	1.1997	6.1537; 1.0465	2.7089	2.0177	9.6659; 1.6935	3.1797	2.1937	15.0011]
+% figure;
+% bar3(maxerr);
+% 
+% % Add title and axis labels
+% title('Maximum % Error on parameter Values with sample cuts');
+% xlabel('signal');
+% ylabel('reduction');
+% zlabel('Max % Error');
+% 
+% % Change the x and y axis tick labels
+% set(gca, 'XTickLabel', signal);
+% set(gca, 'YTickLabel', redn);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % This portion of the code plots MSE for different NumInt techniques for
+% % the ECG Lead II signal
+signalData = ['nearest'; 'linear '; 'spline ';  'pchip  '; 'v5cubic']
+technique = cellstr(signalData)
+rednCateg = ['Halved'; '1/3rd '; '1/4th '; '1/5th ']
+redn = cellstr(rednCateg)
+maxerr = [0.1948	0.0507	0.0496	0.0493	0.0497; 0.221	0.0827	0.0859	0.0732	0.0732; 0.3362	0.1299	0.122	0.1252	0.1256; 0.4431	0.2016	0.1251	0.1371	0.1576]
+figure;
+bar3(maxerr);
+
+% Add title and axis labels
+title('MSE in prediction of parameter values after sample cut variations from various rebuilding techniques');
+xlabel('technique');
+ylabel('reduction');
+zlabel('MSE');
+
+% Change the x and y axis tick labels
+set(gca, 'XTickLabel', technique);
+set(gca, 'YTickLabel', redn);
