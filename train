@@ -1,0 +1,49 @@
+% Reads the data from TestDataCalVal.xlsx file [128x13] and plots it in line connections
+
+clear all
+simplenarxInputs = xlsread('apneaECG400.xls');
+simplenarxInputs = (simplenarxInputs)';
+
+% Select alternate samples
+simplenarxInputs = simplenarxInputs(1:2:size(simplenarxInputs, 2));
+
+simplenarxInputs = (simplenarxInputs)';
+simplenarxTargets = simplenarxInputs;
+simplenarxInputs = num2cell(simplenarxInputs);
+simplenarxTargets = simplenarxInputs;
+T = simplenarxTargets;
+X = simplenarxTargets;
+net = narxnet(1:2, 1:2, 10);
+[Xs, Xi, Ai, Ts] = preparets(net, X, {}, T);
+net = train(net,Xs,Ts,Xi,Ai);
+
+% get the output(s) y and errors
+y = net(Xs,Xi,Ai);
+errors = gsubtract(Ts,y);
+
+% downloaded submitted m-file for cell2csv function
+cell2csv('apn400err.csv', errors);
+cell2csv('apn400outp.csv', y);
+
+%Calculate mean squared error
+perf = mse(net, Ts, y)
+
+
+--------------------------------------------------------
+clear all
+simplenarxInputs = xlsread('apneaECG400.xls');
+simplenarxInputs = (simplenarxInputs)';
+simplenarxInputs = simplenarxInputs(1:2:size(simplenarxInputs, 2));
+simplenarxTargets = simplenarxInputs;
+simplenarxInputs = num2cell(simplenarxInputs);
+simplenarxTargets = simplenarxInputs;
+T = simplenarxTargets;
+X = simplenarxTargets;
+net = narxnet(1:2, 1:2, 10);
+[Xs, Xi, Ai, Ts] = preparets(net, X, {}, T);
+net = trainlm(net,Xs,Ts,Xi,Ai);
+y = net(Xs,Xi,Ai);
+errors = gsubtract(Ts,y);
+cell2csv('apn400Alterr.csv', errors);
+cell2csv('apn400Altoutp.csv', y);
+perf = mse(net, Ts, y)
